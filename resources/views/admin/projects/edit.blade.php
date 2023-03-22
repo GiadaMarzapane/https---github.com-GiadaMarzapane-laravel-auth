@@ -92,6 +92,7 @@
                 {{-- --------------------FINE INPUT-------------------- --}}
 
                 <button type="submit" class="btn btn-success">Modifica viaggio</button>
+                {{-- aggiunto link per tornare alla index --}}
                 <a href="{{ route('admin.projects.index') }}" class="btn btn-light">Annulla</button>
             </form>
         </div>

@@ -20,7 +20,10 @@
                 @endif
             </section>
             {{-- FORM MODIFICA VIAGGIO - METODO POST + PUT E ACTION CON ROUTE A UPDATE --}}
-            <form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
+            <form
+            action="{{ route('admin.projects.update', $project->id) }}"
+            method="POST"
+            enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 {{-- INPUT PER TITLE --}}
@@ -77,6 +80,12 @@
                     </div>
                 </div>
                 {{-- INPUT PER PHOTO_LINK --}}
+                @if (isset($project->photo_link))
+                <div class="py-4">
+                    <img src="{{ $project->photo_link }}" alt="{{ $project->title }}">
+                </div>
+                @endif
+
                 <div class="mb-4">
                     <label for="photo_link" class="form-label">
                         Link foto:
@@ -87,6 +96,27 @@
                     name="photo_link"
                     value="{{ old('photo_link', $project->photo_link) }}"
                     placeholder="Inserisci link...">
+                </div>
+
+                <p>OPPURE</p>
+
+                {{-- IF per img caricata --}}
+                @if (isset($project->localimg))
+                <div class="py-4">
+                    <img src="{{ asset('storage/' . $project->localimg) }}" alt="{{ $project->title }}">
+                </div>
+                @endif
+
+                <div class="mb-4">
+                    <label for="localimg" class="form-label">
+                        Carica una foto:
+                    </label>
+                        <input
+                        class="form-control"
+                        type="file"
+                        id="localimg"
+                        name="localimg"
+                        accept="image/*">
                 </div>
 
                 {{-- --------------------FINE INPUT-------------------- --}}

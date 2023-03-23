@@ -103,16 +103,19 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
-        // creo variabile per lo slug del title
-        $slug = Str::slug($data['title']);
+        if (array_key_exists('localimg', $data)) {
+            $imgPath = Storage::put('uploads', $data['localimg']);
+            $data['localimg'] = $imgPath;
 
-        $project->update([
-            'title' => $data['title'],
-            'slug' => $slug,
-            'content' => $data['content'],
-            'date' => $data['date'],
-            'photo_link' => $data['photo_link']
-        ]);
+            if($project->localimg){
+                Storage::delete($project->localimg);
+            }
+        }
+
+        // creo variabile per lo slug del title
+        $data['slug'] = Str::slug($data['title']);
+
+        $project->update($data);
 
         return redirect()->route('admin.projects.show', $project->id)->with('status', 'Viaggio aggiornato!');;
     }

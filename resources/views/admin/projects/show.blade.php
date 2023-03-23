@@ -18,7 +18,11 @@
                 Anno del viaggio: 
                 {{ $project->date }}
             </h5>
-            <img src="{{  $project->photo_link }}" alt="{{ $project->title }}">
+            @if (isset($project->photo_link))
+            <div class="py-4">
+                <img src="{{ $project->photo_link }}" alt="{{ $project->title }}">
+            </div>
+            @endif
             <p>
                 {{ $project->content }}
             </p>

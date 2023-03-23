@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateProjectRequest;
 
 // Helper
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -61,12 +62,20 @@ class ProjectController extends Controller
         // creo variabile per lo slug del title
         $slug = Str::slug($data['title']);
 
+        if (array_key_exists('localimg', $data)) {
+            $imgPath = Storage::put('uploads', $data['localimg']);
+            $data['localimg'] = $imgPath;
+        }
+        
+        // $newProject = Project::create($data);
+
         $newProject = Project::create([
             'title'=> $data['title'],
             'slug'=> $slug,
             'content'=> $data['content'],
             'date'=> $data['date'],
-            'photo_link'=> $data['photo_link']
+            'photo_link'=> $data['photo_link'],
+            'localimg' => $imgPath,
         ]);
 
         return redirect()->route('admin.projects.show', $newProject->id)->with('status', 'Viaggio aggiunto con successo!');;

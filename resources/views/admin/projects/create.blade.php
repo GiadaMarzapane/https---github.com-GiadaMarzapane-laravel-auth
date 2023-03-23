@@ -19,8 +19,15 @@
                     </div>
                 @endif
             </section>
-            {{-- FORM CREAZIONE NUOVO VIAGGIO - METODO POST E ACTION CON ROUTE A STORE --}}
-            <form action="{{ route('admin.projects.store') }}" method="POST">
+            {{-- FORM CREAZIONE NUOVO VIAGGIO -
+                METODO POST -
+                ENCTYPE PER CARICAMENTO FILE -
+                ACTION CON ROUTE A STORE
+            --}}
+            <form
+            action="{{ route('admin.projects.store') }}"
+            method="POST"
+            enctype="multipart/form-data">
                 @csrf
                 {{-- INPUT PER TITLE --}}
                 <div class="mb-4">
@@ -75,14 +82,32 @@
                 </div>
                 {{-- INPUT PER PHOTO_LINK --}}
                 <div class="mb-4">
-                    <label for="title" class="form-label">
-                        Link foto:
+                    <label for="photo_link" class="form-label">
+                        Inserisci una foto tramite Link:
                     </label>
                     <input type="text"
                     class="form-control"
                     id="photo_link"
                     name="photo_link"
                     placeholder="Inserisci link...">
+                </div>
+
+                <p>OPPURE</p>
+                <div class="mb-4">
+                    <label for="localimg" class="form-label">
+                        Carica una foto:
+                    </label>
+                        <input
+                        class="form-control"
+                        type="file"
+                        id="localimg"
+                        name="localimg"
+                        accept="image/*">
+                    {{-- <input type="text"
+                    class="form-control"
+                    id="photo_link"
+                    name="photo_link"
+                    placeholder="Inserisci link..."> --}}
                 </div>
 
                 {{-- --------------------FINE INPUT-------------------- --}}

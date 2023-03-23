@@ -14,6 +14,7 @@ class Project extends Model
         'content',
         'slug',
         'date',
-        'photo_link'
+        'photo_link',
+        'localimg'
     ];
 }

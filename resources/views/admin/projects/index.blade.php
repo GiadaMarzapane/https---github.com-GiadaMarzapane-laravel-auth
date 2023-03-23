@@ -34,9 +34,17 @@
                             <a class="btn btn-warning" href="{{ route('admin.projects.edit', $element->id) }}">
                                 <i class="fa-solid fa-pencil"></i>
                             </a>
-                            <a class="btn btn-dark" href="#">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
+                            <form
+                            class="d-inline-block"
+                            action="{{ route('admin.projects.destroy', $element->id) }}"
+                            method="post"
+                            onsubmit="return confirm('Sei sicuro di voler eliminare {{ $element->title }}?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-dark" type="submit">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

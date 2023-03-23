@@ -34,6 +34,11 @@
             <p>
                 {{ $project->content }}
             </p>
+            <div class="mt-3 text-end">
+                <a class="btn btn-warning" href="{{ route('admin.projects.edit', $project->id) }}">
+                Modifica viaggio
+                </a>
+            </div>
         </div>
     </div>
 </div>
